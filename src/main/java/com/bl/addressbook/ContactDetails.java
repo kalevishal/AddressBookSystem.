@@ -2,8 +2,22 @@ package com.bl.addressbook;
 
 public class ContactDetails {
     private String firstName, lastName, address, city, state, email;
-    private int zip;
-    private long phoneNo;
+    long zip,phoneno;
+    public ContactDetails()
+    {}
+
+    public ContactDetails(String firstName, String lastName, String address, String city, String state, String email,long zip,long phoneNo) {
+        super();
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.email = email;
+        this.zip = zip;
+        this.phoneno = phoneNo;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -52,20 +66,21 @@ public class ContactDetails {
         this.email = email;
     }
 
-    public int getZip() {
+    public long getZip() {
         return zip;
     }
 
-    public void setZip(int zip) {
+    public void setZip(long zip) {
         this.zip = zip;
     }
 
+
     public long getPhoneNo() {
-        return phoneNo;
+        return phoneno;
     }
 
     public void setPhoneNo(long phoneNo) {
-        this.phoneNo = phoneNo;
+        this.phoneno = phoneNo;
     }
 
     @Override
@@ -78,9 +93,11 @@ public class ContactDetails {
                 ", state='" + state + '\'' +
                 ", email='" + email + '\'' +
                 ", zip=" + zip +
-                ", phoneNo=" + phoneNo +
+                ", phoneNo=" + phoneno +
                 '}';
     }
 
 
+    public void add(ContactDetails contactDetails) {
+    }
 }
