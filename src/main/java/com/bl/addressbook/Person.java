@@ -9,6 +9,15 @@ public class Person {
     private String zip;
     private String phoneNumber;
     private LocalDate date;
+    private String BookName;
+
+    public String getBookName() {
+        return BookName;
+    }
+
+    public void setBookName(String bookName) {
+        BookName = bookName;
+    }
 
     public LocalDate getDate() {
         return date;

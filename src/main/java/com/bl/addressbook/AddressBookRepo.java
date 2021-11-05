@@ -1,5 +1,3 @@
-package com.bl.addressbook;
-
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,7 +8,7 @@ public class AddressBookRepo {
     static Connection getConnection() {
         String url = "jdbc:mysql://localhost:3306/AddressBookDB";
         String username = "root";
-        String password = "9021";
+        String password = "Monali@12345";
         Connection connection = null;
         try {
             //Loading and registering driver
@@ -22,6 +20,23 @@ public class AddressBookRepo {
         }
         return connection;
     }
+
+    public static void insertData(Person add) {
+        try (Connection connection = getConnection()) {
+            Statement statement = connection.createStatement();
+            String sql = "insert into addressBook(firstName,lastName,address,city,state,zip,phoneNumber,bookName,date)" +
+                    "values('" + add.getFirstName() + "','" + add.getLastName() + "','" + add.getAddress() + "','" + add.getCity() +
+                    "','" + add.getState() + "','" + add.getZip() + "','" + add.getPhoneNumber() + "','" +
+                    "','" + add.getBookName() + "','" + add.getDate() + "');";
+            int result = statement.executeUpdate(sql);
+            if (result == 1) {
+                System.out.println("Contact Added successfully ...");
+            } else System.out.println("Data Not inserted");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Person> retrieveData() {
         ResultSet resultSet = null;
         List<Person> employeeInfoList = new ArrayList<>(
