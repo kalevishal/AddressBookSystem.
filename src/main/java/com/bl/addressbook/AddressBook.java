@@ -3,9 +3,9 @@ package com.bl.addressbook;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class AddressBook {
+    static String firstName;
     static ArrayList<ContactDetails> list=new ArrayList<ContactDetails>();
     static Scanner scan =new Scanner(System.in);
-
     public void Add_Contact(ContactDetails c) {
         Scanner scanner =new Scanner(System.in);
         System.out.print("Add Contact  \n");
@@ -49,6 +49,14 @@ public class AddressBook {
                 System.out.println("Not Found");
         }
     }
+    public void deleteContact(ContactDetails c,String firstName){
+        for (int i = 0; i < list.size(); i++) {
+            c = (ContactDetails) list.get(i);
+            if (firstName.equals(c.getFirstName())) {
+                list.remove(i);
+            }
+        }
+    }
     public static void main(String[] args) {
         AddressBook book=new AddressBook();
         ContactDetails c;
@@ -56,8 +64,9 @@ public class AddressBook {
         do
         {
             System.out.println("Enter your option: ");
-            System.out.println("1.Add contact  ");
-            System.out.println("2.Edit Contact ");
+            System.out.println("1.Add contact");
+            System.out.println("2.Edit Contact");
+            System.out.println("3.Delete Contact");
             option= scan.nextInt();
             c=new ContactDetails();
             Scanner sc=new Scanner(System.in);
@@ -69,8 +78,13 @@ public class AddressBook {
                     break;
                 case 2:
                     System.out.println("Enter first name that you want to edit:");
-                    String firstName = sc.nextLine();
+                    firstName = sc.nextLine();
                     book.editContact(c,firstName);
+                    break;
+                case 3:
+                    System.out.println("Enter first name that you want to delete:");
+                    firstName=sc.nextLine();
+                    book.deleteContact(c,firstName);
                     break;
             }
             System.out.println("Do you want to continue: Enter 1.Continue or 0.Exit)");
@@ -78,4 +92,3 @@ public class AddressBook {
         }
         while (option!=0);
     }
-}
