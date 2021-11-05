@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.*;
 public class AddressBook {
-    public static Scanner scan= new Scanner(System.in);
+    public static Scanner scan = new Scanner(System.in);
 
     public ArrayList<ContactDetails> contactList ;
     public HashMap<String, ArrayList<ContactDetails>> personByState;
@@ -41,17 +41,17 @@ public class AddressBook {
         contactList.add(contactDetails);
         System.out.println(contactDetails);
         if(!personByState.containsKey(state)){
-            personByState.put(state,new ArrayList<>());
+            personByState.put(state,new ArrayList<ContactDetails>());
         }
         personByState.get(state).add(contactDetails);
 
         if(!personByCity.containsKey(city)){
-            personByCity.put(city,new ArrayList<>());
+            personByCity.put(city,new ArrayList<ContactDetails>());
         }
         personByCity.get(city).add(contactDetails);
 
     }
-    // Edit Contact Details
+
     public boolean editContactDetails(String Name)
     {
         int flag = 0;
@@ -135,7 +135,7 @@ public class AddressBook {
         }
         return flag == 1;
     }
-    //	Display Contact
+
     public boolean Display(String Name)
     {
         int flag = 0;
@@ -150,7 +150,7 @@ public class AddressBook {
         }
         return flag == 1;
     }
-    //	Display Address Book
+
     public boolean DisplayAddressBook()
     {
         int flag = 0;
@@ -158,7 +158,7 @@ public class AddressBook {
         flag = 1;
         return flag == 1;
     }
-    // Delete Contact Details
+
     public boolean deleteContact(String name) {
         int flag = 0;
         for(ContactDetails contact: contactList)
@@ -172,7 +172,7 @@ public class AddressBook {
         }
         return flag == 1;
     }
-    // Check Duplicate Entry
+
     public void checkDuplicate() {
         Set<String> ContactSet = new HashSet<>();
         Set<ContactDetails> filterSet = contactList.stream().filter(n -> !ContactSet.add(n.getFirstName())).collect(Collectors.toSet());
@@ -181,7 +181,7 @@ public class AddressBook {
             System.out.println("The Duplicate Contact is: " + contact.getFirstName() + " " + contact.getLastName());
         }
     }
-    // Get Person Name by State
+
     public void getPersonNameByState(String State) {
         List<ContactDetails> list  = contactList.stream().filter(p ->p.getState().equals(State)).collect(Collectors.toList());
         for(ContactDetails contact: list){
@@ -189,7 +189,7 @@ public class AddressBook {
             System.out.println("Last Name: "+contact.getLastName());
         }
     }
-    // Get Person Name by city
+
     public void getPersonNameByCity(String cityName) {
         List<ContactDetails> list  = contactList.stream().filter(p ->p.getCity().equals(cityName)).collect(Collectors.toList());
         for(ContactDetails contact: list){

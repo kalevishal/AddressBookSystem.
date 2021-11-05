@@ -91,13 +91,13 @@ public class AddressBookMain {
                 case 8:
                     System.out.println("Enter  State Name: ");
                     String stateName = scan.next();
-                    addressBookMain.NoofPeoplefromParticulerState(stateName);
+                    addressBookMain.NUmberOfPeopleOfParticulerState(stateName);
                     break;
 
                 case 9:
                     System.out.println("Enter  City Name: ");
                     String cityName = scan.next();
-                    addressBookMain.NoofPeoplefromParticulercity(cityName);
+                    addressBookMain.NumberOfPeopleOfParticulercity(cityName);
                     break;
 
                 case 10:
@@ -106,6 +106,18 @@ public class AddressBookMain {
                     addressBookMain.sorting();
 
                 case 11:
+                    addressBookMain.sortByCity();
+                    break;
+
+                case 12:
+                    addressBookMain.sortByState();
+                    break;
+
+                case 13:
+                    addressBookMain.sortByZipCode();
+                    break;
+
+                case 14:
                     flag = false;
                     break;
             }
@@ -178,7 +190,7 @@ public class AddressBookMain {
             }
         }
     }
-    // Search Person by State
+
     private void searchPersonByState(String stateName) {
         for(Map.Entry<String,AddressBook> entry: addressBookListMap.entrySet()){
             AddressBook value = entry.getValue();
@@ -186,7 +198,7 @@ public class AddressBookMain {
             value.getPersonNameByState(stateName);
         }
     }
-    // Search Person by city
+
     private void searchPersonByCity(String cityName) {
         for(Map.Entry<String,AddressBook> entry: addressBookListMap.entrySet()){
             AddressBook value = entry.getValue();
@@ -194,7 +206,7 @@ public class AddressBookMain {
             value.getPersonNameByCity(cityName);
         }
     }
-    // view Person by State
+
     private void viewPersonByState(String stateName) {
         for (Map.Entry<String, AddressBook> entry : addressBookListMap.entrySet()) {
             AddressBook value = entry.getValue();
@@ -205,7 +217,7 @@ public class AddressBookMain {
             }
         }
     }
-    // view Person by city
+
     private void viewPersonByCity(String cityName) {
         for (Map.Entry<String, AddressBook> entry : addressBookListMap.entrySet()) {
             AddressBook value = entry.getValue();
@@ -217,8 +229,7 @@ public class AddressBookMain {
         }
     }
 
-    //	  Count contact persons from particular state
-    public void NoofPeoplefromParticulerState(String state) {
+    public void NUmberOfPeopleOfParticulerState(String state) {
         int count = 0;
         for(Map.Entry<String, AddressBook> entry: addressBookListMap.entrySet()){
             for(int i=0;i<(entry.getValue()).contactList.size();i++)
@@ -234,8 +245,8 @@ public class AddressBookMain {
         }
         System.out.println("Total Person from the state "+state+": "+count);
     }
-    // Count contact persons from particular city
-    public void NoofPeoplefromParticulercity(String city) {
+
+    public void NumberOfPeopleOfParticulercity(String city) {
         int countPersonInCity=0;
         for(Map.Entry<String, AddressBook> entry: addressBookListMap.entrySet())
         {
@@ -251,7 +262,7 @@ public class AddressBookMain {
         }
         System.out.println("Total persons from this city "+city+": "+countPersonInCity);
     }
-    // sort Contact by Name
+
     private void sorting() {
         for (Map.Entry<String,AddressBook>entry:addressBookListMap.entrySet()){
             AddressBook value = entry.getValue();
@@ -259,6 +270,44 @@ public class AddressBookMain {
                     comparing(ContactDetails::getFirstName)).collect(Collectors.toList());
 
             for(ContactDetails contact:sortedList){
+                System.out.println("First Name: "+contact.getFirstName());
+                System.out.println("Last Name: "+contact.getLastName());
+            }
+        }
+    }
+    private void sortByCity() {
+        for (Map.Entry<String,AddressBook>entry:addressBookListMap.entrySet()){
+            AddressBook value = entry.getValue();
+            List<ContactDetails> sortedCity = value.contactList.stream().sorted(Comparator.comparing(ContactDetails::getCity)).collect(Collectors.toList());
+
+            for(ContactDetails contact:sortedCity) {
+                System.out.println("City: "+contact.getCity());
+                System.out.println("First Name: "+contact.getFirstName());
+                System.out.println("Last Name: "+contact.getLastName());
+            }
+        }
+    }
+
+    private void sortByState() {
+        for (Map.Entry<String,AddressBook>entry:addressBookListMap.entrySet()){
+            AddressBook value = entry.getValue();
+            List<ContactDetails> sortedState = value.contactList.stream().sorted(Comparator.comparing(ContactDetails::getState)).collect(Collectors.toList());
+
+            for(ContactDetails contact:sortedState) {
+                System.out.println("State: "+contact.getState());
+                System.out.println("First Name: "+contact.getFirstName());
+                System.out.println("Last Name: "+contact.getLastName());
+            }
+        }
+    }
+
+    private void sortByZipCode() {
+        for (Map.Entry<String,AddressBook>entry:addressBookListMap.entrySet()){
+            AddressBook value = entry.getValue();
+            List<ContactDetails> sortedList = value.contactList.stream().sorted(Comparator.comparing(ContactDetails::getZip)).collect(Collectors.toList());
+
+            for(ContactDetails contact:sortedList){
+                System.out.println("zip code: "+contact.getZip());
                 System.out.println("First Name: "+contact.getFirstName());
                 System.out.println("Last Name: "+contact.getLastName());
             }
