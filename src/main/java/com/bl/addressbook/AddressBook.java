@@ -1,4 +1,3 @@
-
 import java.io.*;
 import java.sql.SQLException;
 import java.util.List;
@@ -11,7 +10,13 @@ public class AddressBook {
         AddressBook addressBook=new AddressBook();
         addressBook.retrieveData();
         addressBook.updateSalary();
+        addressBook.getContactsInDatePeriod();
     }
+
+    private void getContactsInDatePeriod() throws SQLException {
+        addressBookRepo.getContactsInDatePeriod();
+    }
+
     private void retrieveData () throws SQLException {
         List<Person> employeeInfoList = addressBookRepo.retrieveData();
         System.out.println(employeeInfoList);
@@ -19,4 +24,5 @@ public class AddressBook {
     private void updateSalary() {
         addressBookRepo.updateSalary("Mona",5000);
     }
+
 }

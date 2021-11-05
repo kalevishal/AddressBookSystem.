@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Person {
     private String firstName;
     private String lastName;
@@ -6,6 +8,15 @@ public class Person {
     private String state;
     private String zip;
     private String phoneNumber;
+    private LocalDate date;
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
 
     public Person(){
         this.firstName=firstName;
