@@ -7,7 +7,16 @@ import java.util.stream.Collectors;
 import java.util.*;
 public class AddressBook {
     public static Scanner scan = new Scanner(System.in);
-    public ArrayList<ContactDetails> contactList = new ArrayList<>();
+
+    public ArrayList<ContactDetails> contactList ;
+    public HashMap<String, ArrayList<ContactDetails>> personByState;
+    public HashMap<String, ArrayList<ContactDetails>> personByCity;
+
+    public AddressBook() {
+        personByCity = new HashMap<String, ArrayList<ContactDetails>>();
+        personByState = new HashMap<String, ArrayList<ContactDetails>>();
+        contactList = new ArrayList<>();
+    }
 
     public void addContactDetails() {
         System.out.println("Enter the First Name: ");
@@ -29,6 +38,16 @@ public class AddressBook {
 
         ContactDetails contactDetails = new ContactDetails(firstName, lastName, address, city, state, email, zip, phoneNumber);
         contactDetails.add(contactDetails);
+        System.out.println(contactDetails);
+        if(!personByState.containsKey(state)){
+            personByState.put(state,new ArrayList<ContactDetails>());
+        }
+        personByState.get(state).add(contactDetails);
+
+        if(!personByCity.containsKey(city)){
+            personByCity.put(city,new ArrayList<ContactDetails>());
+        }
+        personByCity.get(city).add(contactDetails);
     }
 
     public boolean editContactDetails(String Name) {
@@ -142,6 +161,16 @@ public class AddressBook {
         }
         return flag == 1;
     }
+    public boolean DisplayAddressBook(String Name)
+    {
+        int flag = 0;
+        for (int i = 0; i < contactList.size(); i++) {
+            System.out.println(contactList);
+            flag = 1;
+        }
+        return flag == 1;
+    }
+
     public void getPersonNameByState(String State) {
         List<ContactDetails> list  = contactList.stream().filter(p ->p.getState().equals(State)).collect(Collectors.toList());
         for(ContactDetails contact: list){
