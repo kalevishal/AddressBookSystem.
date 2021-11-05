@@ -10,9 +10,13 @@ public class AddressBook {
     public static void main(String[] args) throws SQLException {
         AddressBook addressBook=new AddressBook();
         addressBook.retrieveData();
+        addressBook.updateSalary();
     }
     private void retrieveData () throws SQLException {
         List<Person> employeeInfoList = addressBookRepo.retrieveData();
         System.out.println(employeeInfoList);
+    }
+    private void updateSalary() {
+        addressBookRepo.updateSalary("Mona",5000);
     }
 }
