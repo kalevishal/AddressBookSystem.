@@ -7,20 +7,21 @@ import java.util.Scanner;
 
 public class AddressBookMain {
     public static Scanner scan = new Scanner(System.in);
-    private static final AddressBook addressBook = new AddressBook();
+    private static AddressBook addressBook = new AddressBook();
     public Map<String,AddressBook> addressBookListMap = new HashMap<>();
     private String addressBookName;
 
     public void addAddressBook(String bookName){
         boolean flag = true;
+
         while(flag) {
-
-            System.out.println("1.Add Contact");
-            System.out.println("2.Edit Contact");
-            System.out.println("3.Delete Contact");
-            System.out.println("4.Exit");
-            System.out.println("Enter Choice: ");
-
+            System.out.println("Select an option to select\n"
+                    +"1] Add Contact\n"
+                    +"2] Display\n"
+                    +"3] Edit contact\n"
+                    +"4] Delete Contact\n"
+                    +"5] Exit\n"
+                    + "Enter your Choice\n");
             int option = scan.nextInt();
 
             switch (option)
@@ -31,8 +32,23 @@ public class AddressBookMain {
                     for(int i = 0; i < noOfContacts; i++) {
                         addressBook.addContactDetails();
                     }
+                    addressBookListMap.put(addressBookName, addressBook);
+                    System.out.println("Address Book Added Successfully");
                     break;
+
                 case 2:
+                    System.out.println("Enter the Person First name to Display ");
+                    String Name = scan.next();
+
+                    boolean list = addressBook.Display(Name);
+                    if (list) {
+                        System.out.println("Displayed the Contact");
+                    } else {
+                        System.out.println(" Cannot be Displayed");
+                    }
+                    break;
+
+                case 3:
                     System.out.println("Enter the Person First name to edit details: ");
                     String personName = scan.next();
 
@@ -43,7 +59,8 @@ public class AddressBookMain {
                         System.out.println("List Cannot be Edited");
                     }
                     break;
-                case 3:
+
+                case 4:
                     System.out.println("Enter the Contact to be deleted:");
                     String firstName = scan.next();
                     boolean listDeleted = addressBook.deleteContact(firstName);
@@ -53,27 +70,31 @@ public class AddressBookMain {
                         System.out.println("List Cannot be Deleted");
                     }
                     break;
-                case 4:
+
+                case 5:
                     flag =false;
                     break;
             }
-
-            addressBookListMap.put(addressBookName, addressBook);
-            System.out.println("Address Book Added Successfully");
         }
     }
+
     public static void main(String[] args) {
+
         System.out.println("Welcome to the Address Book  System ");
         AddressBookMain addressBookMain = new AddressBookMain();
         boolean flag =true;
         while(flag)
         {
-            System.out.println("1.Add New Address Book");
-            System.out.println("2.Find Duplicate Entry in Address Book");
-            System.out.println("3.Exit");
-            System.out.println("Enter choice: ");
+            System.out.println("Select an option\n"
+                    +"1] Add New Address Book\n"
+                    +"2] Find Duplicate Entry in Address Book\n"
+                    +"3]Search Contact from a city\n"
+                    +"4]Search Contact from a State\n"
+                    +"5]Exit\n"
+                    + "Enter your Choice\n");
             int option = scan.nextInt();
             switch (option){
+
                 case 1: {
                     System.out.println("Enter the Name of Address Book: ");
                     String addressBookName = scan.next();
@@ -85,17 +106,46 @@ public class AddressBookMain {
                         break;
                     }
                 }
+
                 case 2:
                     for (Map.Entry<String, AddressBook> entry : addressBookMain.addressBookListMap.entrySet()) {
                         AddressBook value = entry.getValue();
                         System.out.println("Address Book Name: " + entry.getKey());
                         value.checkDuplicate();
                     }
-                case 3:{
-                    flag = false;
+
+                case 3:
+                    System.out.println("Enter Name of City: ");
+                    String CityName = scan.next();
+                    addressBookMain.searchPersonByCity(CityName);
+                    break;
+
+                case 4:{
+                    System.out.println("Enter Name of State: ");
+                    String StateName = scan.next();
+                    addressBookMain.searchPersonByState(StateName);
                     break;
                 }
+                case 5:
+                    flag = false;
+                    break;
             }
+        }
+    }
+
+    private void searchPersonByState(String stateName) {
+        for(Map.Entry<String,AddressBook> entry: addressBookListMap.entrySet()){
+            AddressBook value = entry.getValue();
+            System.out.println("The Address Book: "+entry.getKey());
+            value.getPersonNameByState(stateName);
+        }
+    }
+
+    private void searchPersonByCity(String cityName) {
+        for(Map.Entry<String,AddressBook> entry: addressBookListMap.entrySet()){
+            AddressBook value = entry.getValue();
+            System.out.println("The Address Book: "+entry.getKey());
+            value.getPersonNameByCity(cityName);
         }
     }
 }

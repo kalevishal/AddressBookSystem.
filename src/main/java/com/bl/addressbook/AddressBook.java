@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+import java.util.*;
 public class AddressBook {
     public static Scanner scan = new Scanner(System.in);
     public ArrayList<ContactDetails> contactList = new ArrayList<>();
@@ -126,6 +126,35 @@ public class AddressBook {
 
         for (ContactDetails contact : filterSet) {
             System.out.println("The Duplicate Contact is: " + contact.getFirstName() + " " + contact.getLastName());
+        }
+    }
+    public boolean Display(String Name)
+    {
+        int flag = 0;
+        for(ContactDetails contact: contactList)
+        {
+            if(contact.getFirstName().equals(Name))
+            {
+                System.out.println(contact);
+                flag = 1;
+                break;
+            }
+        }
+        return flag == 1;
+    }
+    public void getPersonNameByState(String State) {
+        List<ContactDetails> list  = contactList.stream().filter(p ->p.getState().equals(State)).collect(Collectors.toList());
+        for(ContactDetails contact: list){
+            System.out.println("First Name: "+contact.getFirstName());
+            System.out.println("Last Name: "+contact.getLastName());
+        }
+    }
+
+    public void getPersonNameByCity(String cityName) {
+        List<ContactDetails> list = contactList.stream().filter(p -> p.getCity().equals(cityName)).collect(Collectors.toList());
+        for (ContactDetails contact : list) {
+            System.out.println("First Name: " + contact.getFirstName());
+            System.out.println("Last Name: " + contact.getLastName());
         }
     }
 }
