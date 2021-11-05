@@ -4,15 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+
 public class AddressBookMain {
     public static Scanner scan = new Scanner(System.in);
-    private static AddressBook addressBook = new AddressBook();
+    private static final AddressBook addressBook = new AddressBook();
     public Map<String,AddressBook> addressBookListMap = new HashMap<>();
+    private String addressBookName;
 
     public void addAddressBook(String bookName){
-
         boolean flag = true;
-
         while(flag) {
 
             System.out.println("1.Add Contact");
@@ -26,15 +26,12 @@ public class AddressBookMain {
             switch (option)
             {
                 case 1:
-
                     System.out.println("enter no of contacts to be added");
                     int noOfContacts = scan.nextInt();
                     for(int i = 0; i < noOfContacts; i++) {
                         addressBook.addContactDetails();
                     }
                     break;
-
-
                 case 2:
                     System.out.println("Enter the Person First name to edit details: ");
                     String personName = scan.next();
@@ -59,18 +56,21 @@ public class AddressBookMain {
                 case 4:
                     flag =false;
                     break;
-
             }
-        }
 
+            addressBookListMap.put(addressBookName, addressBook);
+            System.out.println("Address Book Added Successfully");
+        }
     }
     public static void main(String[] args) {
+        System.out.println("Welcome to the Address Book  System ");
         AddressBookMain addressBookMain = new AddressBookMain();
         boolean flag =true;
         while(flag)
         {
             System.out.println("1.Add New Address Book");
-            System.out.println("2.Exit");
+            System.out.println("2.Find Duplicate Entry in Address Book");
+            System.out.println("3.Exit");
             System.out.println("Enter choice: ");
             int option = scan.nextInt();
             switch (option){
@@ -85,7 +85,13 @@ public class AddressBookMain {
                         break;
                     }
                 }
-                case 2:{
+                case 2:
+                    for (Map.Entry<String, AddressBook> entry : addressBookMain.addressBookListMap.entrySet()) {
+                        AddressBook value = entry.getValue();
+                        System.out.println("Address Book Name: " + entry.getKey());
+                        value.checkDuplicate();
+                    }
+                case 3:{
                     flag = false;
                     break;
                 }
