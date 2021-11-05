@@ -3,9 +3,10 @@ package com.bl.addressbook;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class AddressBook {
+
     static String firstName;
     static ArrayList<ContactDetails> list=new ArrayList<ContactDetails>();
-    static Scanner scan =new Scanner(System.in);
+    static Scanner scan=new Scanner(System.in);
     public void Add_Contact(ContactDetails c) {
         Scanner scanner =new Scanner(System.in);
         System.out.print("Add Contact  \n");
@@ -57,9 +58,10 @@ public class AddressBook {
             }
         }
     }
+
     public static void main(String[] args) {
         AddressBook book=new AddressBook();
-        ContactDetails c;
+        ContactDetails c = null;
         int option;
         do
         {
@@ -92,3 +94,4 @@ public class AddressBook {
         }
         while (option!=0);
     }
+}

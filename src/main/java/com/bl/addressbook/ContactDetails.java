@@ -4,18 +4,6 @@ public class ContactDetails {
     private String firstName, lastName, address, city, state, email;
     private int zip;
     private long phoneNo;
-
-    public ContactDetails() {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.city = city;
-        this.state = state;
-        this.email = email;
-        this.zip = zip;
-        this.phoneNo = phoneNo;
-    }
-
     public String getFirstName() {
         return firstName;
     }
